@@ -1,0 +1,57 @@
+<template>
+  <div>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Payments</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(product, id) in this.products" :key="product.id">
+          <td>{{ product.name }}</td> 
+          <td>{{ product.price }}</td> 
+          <td>{{ product.payment || 0 }}</td> 
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</template>
+
+<script>
+
+export default {
+  name: 'tableProducts',
+
+  props: ['products']
+}
+</script>
+
+<style scoped>
+table {
+  border: 2px solid green;
+  border-radius: 3px;
+  background-color: #fff;
+  margin-left: 52px;
+  margin-bottom: 5px;
+  table-layout: fixed;
+  width: 293px;
+}
+
+th {
+  background-color: green;
+  color: rgba(255,255,255,0.66);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  padding: 5px 10px;
+  text-align: center;
+}
+</style>
