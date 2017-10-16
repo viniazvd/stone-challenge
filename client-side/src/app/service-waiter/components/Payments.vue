@@ -1,13 +1,13 @@
 <template>
 	<div>
     <h1 class="configSubTitle">payments</h1>
-
+{{ payments }}
 		<div v-for="(item, index) in payments" :key="item.id">
       <div class="centralize">  
         <select id="selectbox" v-model="item.itemSelected" class="form-control">
           <option value="">Item to pay</option>
-          <option v-for="x in products" :key="x.name" @value="x.name">
-            {{ x.name }}
+          <option v-for="product in products" :key="product.id" @value="product[0].name">
+            {{ product[0].name }}
           </option>
         </select>
 

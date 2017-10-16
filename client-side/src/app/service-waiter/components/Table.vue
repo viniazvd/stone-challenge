@@ -9,10 +9,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, id) in this.productsOfTable" :key="product.id">
-          <td>{{ product.name }}</td> 
-          <td>{{ product.price }}</td> 
-          <td>{{ 0 }}</td> 
+        <!-- <tr v-for="(product, id) in this.productsOfTable" :key="product.id"> -->
+        <tr v-for="(productId, index) in this.productsOfTable" :key="productId.id">
+          <td>{{ productId[0].name }}</td> 
+          <td>{{ productId[0].price }}</td> 
+          <td>{{ productId[1] }}</td> 
         </tr>
       </tbody>
     </table>

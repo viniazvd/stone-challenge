@@ -8,7 +8,7 @@
           {{ table.text }}
         </option>
     </select>
-{{ this.payments }}
+
     <TableProducts :productsOfTable="this.selectedTable" v-if="this.selected" />
 
     <ValorTotal :totalTable="this.totalProduct" :totalPayments="this.totalPayments" v-if="this.selected" />
@@ -45,7 +45,7 @@ export default {
     ...mapGetters(['getTables', 'getTableProducts', 'getProducts']),
 
     selectedTable () {
-      return this.getTableProducts[this.selected].products.map(el => this.getProducts[el])
+      return this.getTableProducts[this.selected].products.map(el => [this.getProducts[el.productId], el.paid])
     },
 
     totalProduct () {
@@ -53,19 +53,22 @@ export default {
         return 0
       }
 
-      return this.getTableProducts[this.selected].products.map(el => this.getProducts[el])
-        .map(x => x.price.replace(',', '.'))
-        .map(parseFloat)
+      return this.getTableProducts[this.selected].products.map(el => this.getProducts[el.productId])
+        .map(x => x.price)
+        // .map(parseFloat)
         .reduce((acc, x) => acc + x, 0)
         .toFixed(2)
     },
 
     totalPayments () {
       if (!this.selected) {
-        return 0
+        return 4
       }
 
-      return !this.getTables[this.selected].payments
+      return this.getTableProducts[this.selected].products.map(el => el.paid)
+        // .map(parseFloat)
+        .reduce((acc, x) => acc + x, 0)
+        .toFixed(2)
     }
   },
 
