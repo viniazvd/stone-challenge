@@ -9,16 +9,21 @@
         </option>
     </select>
 
-    <TableProducts :productsOfTable="this.selectedTable" v-if="this.selected" />
+    <TableProducts :productsOfTable="this.createTable" v-if="this.selected" />
 
     <ValorTotal :totalTable="this.totalProduct" :totalPayments="this.totalPayments" v-if="this.selected" />
 
     <hr v-if="this.selected">
 
-    <payments v-model="payments" :products="this.selectedTable" v-if="this.selected"></payments>
+    <payments v-model="payments" 
+      :tableProducts="this.getTableProducts" 
+      :products="this.createTable" 
+      :table="this.getTables" 
+      :tableSelected="this.selected"
+      v-if="this.selected"></payments>
 
     <div class="divButton">
-      <button class="next" @click="next" v-if="this.selected">Close account</button>
+      <button class="next" @click="next" v-if="this.selected" :disabled="closeAccount">Close account</button>
     </div>
 	</div>
 </template>
@@ -41,11 +46,21 @@ export default {
     }
   },
 
+  watch: {
+    selected: function (oldValue, newValue) {
+      // this.fullName = oldValue + ' ' + this.lastName
+      console.log(oldValue, newValue)
+      if (oldValue !== newValue) {
+        delete this.payments
+      }
+    }
+  },
+
   computed: {
     ...mapGetters(['getTables', 'getTableProducts', 'getProducts']),
 
-    selectedTable () {
-      return this.getTableProducts[this.selected].products.map(el => [this.getProducts[el.productId], el.paid])
+    createTable () {
+      return this.getTableProducts[this.selected].products.map(el => [this.getProducts[el.productId], el.paid, el.productId])
     },
 
     totalProduct () {
@@ -69,12 +84,23 @@ export default {
         // .map(parseFloat)
         .reduce((acc, x) => acc + x, 0)
         .toFixed(2)
+    },
+
+    closeAccount () {
+      if (this.totalProduct !== this.totalPayments) {
+        return true
+      } else {
+        return false
+      }
     }
   },
 
   methods: {
     next () {
-      this.$router.push('/list-products')
+      delete this.getTables[this.selected]
+      this.selected = ''
+      alert('Paid account! Closing the table...!')
+      // this.$router.push('/')
     }
   }
 }

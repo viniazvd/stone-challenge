@@ -13,7 +13,7 @@
         <tr v-for="(productId, index) in this.productsOfTable" :key="productId.id">
           <td>{{ productId[0].name }}</td> 
           <td>{{ productId[0].price }}</td> 
-          <td>{{ productId[1] }}</td> 
+          <td>{{ productId[1].toFixed(2) }}</td> 
         </tr>
       </tbody>
     </table>

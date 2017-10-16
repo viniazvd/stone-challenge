@@ -3,7 +3,7 @@
 		<h1 class="configTitle">stone service for restaurants</h1>
 
     <div class="divButton">
-      <button class="next" @click="next">START</button>
+      <button class="next" @click="next">LET'S WORK!</button>
     </div>
 	</div>
 </template>

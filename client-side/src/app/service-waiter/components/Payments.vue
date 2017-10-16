@@ -1,13 +1,14 @@
 <template>
 	<div>
     <h1 class="configSubTitle">payments</h1>
-
+<!-- <pre>{{ this.table[this.tableSelected] }}</pre> -->
 		<div v-for="(item, index) in payments" :key="item.id">
       <div class="centralize">  
         <select id="selectbox" v-model="item.itemSelected" class="form-control">
           <option value="">Item to pay</option>
-          <option v-for="product in products" :key="product.id" @value="product[0].name">
-            {{ product[0].name }}
+          <option v-for="(product, i) in products" :key="product.id" @value="product[2]">
+          <!-- <option v-for="(product, i) in products" :key="product.id" @value="i"> -->
+            {{ i }} - {{ product[0].name }}
           </option>
         </select>
 
@@ -26,7 +27,7 @@
 
 export default {
 
-  props: ['value', 'products'],
+  props: ['value', 'products', 'tableProducts', 'table', 'tableSelected'],
 
   data () {
     return {
@@ -51,21 +52,18 @@ export default {
       const hasPayment = this.payments.map(selectPayment).every(isNotZero)
 
       if (hasItem && hasPayment) {
-        this.payments.push({ payment: '0' })
-        // const itemSelected = this.payments.map(x => x.itemSelected)[[this.payments.length - 2]]
-        // const addPayment = this.payments.map(x => x.payment)[[this.payments.length - 2]]
-        // this.attemptPayment(addPayment)
+        // create a new default input for pay product
+        this.payments.push({ itemSelected: '', payment: '0.0' })
 
-        // const plus = (a, b) => parseFloat(a) + parseFloat(b)
+        const getIndexProductSelected = this.payments[[this.payments.length - 2]].itemSelected[0]
 
-        // const findItem = products => el => {
-        //   const fprod = products.find(prod => prod.name === el.itemSelected)
-        //   fprod ? fprod.payment = plus(fprod.payment, el.payment) : 0
-        // }
+        // add payment in tables.payments[]
+        const productId = this.products[getIndexProductSelected][2]
+        const lastPaid = parseFloat(this.payments[[this.payments.length - 2]].payment)
+        this.table[this.tableSelected].payments.push({ productId: productId, paid: lastPaid })
 
-        // const processPayments = (products, payments) => payments.map(findItem(products))
-
-        // processPayments(this.products, this.payments)
+        // update payment value inside tables_products
+        this.tableProducts[this.tableSelected].products[getIndexProductSelected].paid += lastPaid
 
         return this.products
       }
@@ -82,13 +80,13 @@ export default {
     lastOne (index) {
       return (this.payments.length === 1) ? this.showButton = false : this.showButton = true
     }
-  },
-
-  watch: {
-    payments (payments) {
-      this.$emit('input', payments)
-    }
   }
+
+  // watch: {
+  //   payments (payments) {
+  //     this.$emit('input', payments)
+  //   }
+  // }
 }
 </script>
 
