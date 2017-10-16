@@ -23,7 +23,7 @@
       v-if="this.selected"></payments>
 
     <div class="divButton">
-      <button class="next" @click="next" v-if="this.selected" :disabled="closeAccount">Close account</button>
+      <button class="next" @click="next" v-if="this.selected" :disabled="!closeAccount">Close account</button>
     </div>
 	</div>
 </template>
@@ -80,7 +80,7 @@ export default {
     },
 
     closeAccount () {
-      if (this.totalProduct !== this.totalPayments) {
+      if (this.totalProduct < this.totalPayments || this.totalProduct === this.totalPayments) {
         return true
       } else {
         return false
