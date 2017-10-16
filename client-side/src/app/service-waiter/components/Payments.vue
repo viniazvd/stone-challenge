@@ -1,7 +1,7 @@
 <template>
 	<div>
     <h1 class="configSubTitle">payments</h1>
-{{ payments }}
+
 		<div v-for="(item, index) in payments" :key="item.id">
       <div class="centralize">  
         <select id="selectbox" v-model="item.itemSelected" class="form-control">
