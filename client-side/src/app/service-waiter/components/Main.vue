@@ -42,17 +42,7 @@ export default {
   data () {
     return {
       selected: '',
-      payments: [{ itemSelected: '', payment: '0.0' }]
-    }
-  },
-
-  watch: {
-    selected: function (oldValue, newValue) {
-      // this.fullName = oldValue + ' ' + this.lastName
-      console.log(oldValue, newValue)
-      if (oldValue !== newValue) {
-        delete this.payments
-      }
+      payments: [{ productId: '', table: '', itemSelected: '', payment: '0.0' }]
     }
   },
 
@@ -60,7 +50,8 @@ export default {
     ...mapGetters(['getTables', 'getTableProducts', 'getProducts']),
 
     createTable () {
-      return this.getTableProducts[this.selected].products.map(el => [this.getProducts[el.productId], el.paid, el.productId])
+      return this.getTableProducts[this.selected].products
+        .map(el => [this.getProducts[el.productId], el.paid, el.productId])
     },
 
     totalProduct () {
@@ -68,7 +59,8 @@ export default {
         return 0
       }
 
-      return this.getTableProducts[this.selected].products.map(el => this.getProducts[el.productId])
+      return this.getTableProducts[this.selected].products
+        .map(el => this.getProducts[el.productId])
         .map(x => x.price)
         // .map(parseFloat)
         .reduce((acc, x) => acc + x, 0)
@@ -80,7 +72,8 @@ export default {
         return 4
       }
 
-      return this.getTableProducts[this.selected].products.map(el => el.paid)
+      return this.getTableProducts[this.selected].products
+        .map(el => el.paid)
         // .map(parseFloat)
         .reduce((acc, x) => acc + x, 0)
         .toFixed(2)

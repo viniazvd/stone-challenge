@@ -1,13 +1,12 @@
 <template>
 	<div>
     <h1 class="configSubTitle">payments</h1>
-<!-- <pre>{{ this.table[this.tableSelected] }}</pre> -->
+
 		<div v-for="(item, index) in payments" :key="item.id">
       <div class="centralize">  
         <select id="selectbox" v-model="item.itemSelected" class="form-control">
           <option value="">Item to pay</option>
           <option v-for="(product, i) in products" :key="product.id" @value="product[2]">
-          <!-- <option v-for="(product, i) in products" :key="product.id" @value="i"> -->
             {{ i }} - {{ product[0].name }}
           </option>
         </select>
@@ -54,18 +53,20 @@ export default {
       if (hasItem && hasPayment) {
         // create a new default input for pay product
         this.payments.push({ itemSelected: '', payment: '0.0' })
+        // this.table[this.tableSelected].payments.push({ productId: '', itemSelected: '', payment: '0.0' })
 
         const getIndexProductSelected = this.payments[[this.payments.length - 2]].itemSelected[0]
+        const itemSelected = this.payments[[this.payments.length - 2]].itemSelected
 
         // add payment in tables.payments[]
         const productId = this.products[getIndexProductSelected][2]
         const lastPaid = parseFloat(this.payments[[this.payments.length - 2]].payment)
-        this.table[this.tableSelected].payments.push({ productId: productId, paid: lastPaid })
+        this.table[this.tableSelected].payments.push({ productId: productId, table: this.tableSelected, itemSelected: itemSelected, paid: lastPaid })
 
         // update payment value inside tables_products
         this.tableProducts[this.tableSelected].products[getIndexProductSelected].paid += lastPaid
 
-        return this.products
+        return this.tableProducts[this.tableSelected]
       }
     },
 
