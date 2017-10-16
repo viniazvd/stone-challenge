@@ -17,13 +17,13 @@ export default {
         { productId: 4, paid: 0.0 }
     ] },
     2: { products: [
-        { productId: 5, paid: 1.0 },
+        { productId: 5, paid: 0.0 },
         { productId: 6, paid: 0.0 },
         { productId: 7, paid: 0.0 },
         { productId: 8, paid: 0.0 }
     ] },
     3: { products: [
-        { productId: 9, paid: 2.0 },
+        { productId: 9, paid: 0.0 },
         { productId: 10, paid: 0.0 },
         { productId: 11, paid: 0.0 },
         { productId: 12, paid: 0.0 }

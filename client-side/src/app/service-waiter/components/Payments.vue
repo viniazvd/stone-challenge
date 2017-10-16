@@ -71,6 +71,10 @@ export default {
     },
 
     remove (index, item) {
+      // totalPaidProduct - currentPaidProduct
+      const indexProductInList = item.itemSelected[0]
+      this.tableProducts[this.tableSelected].products[indexProductInList].paid -= parseFloat(item.payment)
+
       return !item ? false : this.payments.splice(index, 1)
     },
 
