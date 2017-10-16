@@ -11,7 +11,7 @@
           </option>
         </select>
 
-        <input type="number" v-model="item.payment" placeholder="Valor">
+        <money class="opa" v-model="item.payment"></money>
   
         <span class="button-success pure-button" v-if="isLast(index)" @click="add">+</span>
         <span class="button-error pure-button" v-if="lastOne(index)" @click="remove(index, item)">-</span>
@@ -23,10 +23,15 @@
 
 <script>
 // import { mapActions } from 'vuex'
+import { Money } from 'v-money'
 
 export default {
 
+  name: 'payments',
+
   props: ['value', 'products', 'tableProducts', 'table', 'tableSelected'],
+
+  components: { Money },
 
   data () {
     return {
@@ -96,7 +101,7 @@ export default {
 </script>
 
 <style scoped>
-input[type=number] {
+.opa {
   height: 22px;
   padding-left:20px;
   padding-top: 3px;
