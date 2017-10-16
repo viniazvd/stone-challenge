@@ -56,16 +56,16 @@ export default {
         // const addPayment = this.payments.map(x => x.payment)[[this.payments.length - 2]]
         // this.attemptPayment(addPayment)
 
-        const plus = (a, b) => parseFloat(a) + parseFloat(b)
+        // const plus = (a, b) => parseFloat(a) + parseFloat(b)
 
-        const findItem = products => el => {
-          const fprod = products.find(prod => prod.name === el.itemSelected)
-          fprod ? fprod.payment = plus(fprod.payment, el.payment) : 0
-        }
+        // const findItem = products => el => {
+        //   const fprod = products.find(prod => prod.name === el.itemSelected)
+        //   fprod ? fprod.payment = plus(fprod.payment, el.payment) : 0
+        // }
 
-        const processPayments = (products, payments) => payments.map(findItem(products))
+        // const processPayments = (products, payments) => payments.map(findItem(products))
 
-        processPayments(this.products, this.payments)
+        // processPayments(this.products, this.payments)
 
         return this.products
       }
