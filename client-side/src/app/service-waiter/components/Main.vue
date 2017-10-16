@@ -8,8 +8,8 @@
           {{ table.text }}
         </option>
     </select>
-
-    <TableProducts :products="this.selectedTable" v-if="this.selected" />
+{{ this.payments }}
+    <TableProducts :productsOfTable="this.selectedTable" v-if="this.selected" />
 
     <ValorTotal :totalTable="this.totalProduct" :totalPayments="this.totalPayments" v-if="this.selected" />
 

@@ -9,10 +9,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(product, id) in this.products" :key="product.id">
+        <tr v-for="(product, id) in this.productsOfTable" :key="product.id">
           <td>{{ product.name }}</td> 
           <td>{{ product.price }}</td> 
-          <td>{{ product.payment || 0 }}</td> 
+          <td>{{ 0 }}</td> 
         </tr>
       </tbody>
     </table>
@@ -25,7 +25,7 @@
 export default {
   name: 'tableProducts',
 
-  props: ['products']
+  props: ['productsOfTable']
 }
 </script>
 
