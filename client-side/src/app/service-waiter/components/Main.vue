@@ -80,7 +80,10 @@ export default {
     },
 
     closeAccount () {
-      if (this.totalProduct < this.totalPayments || this.totalProduct === this.totalPayments) {
+      const totalProducts = parseFloat(this.totalProduct)
+      const totalPayments = parseFloat(this.totalPayments)
+
+      if (totalProducts < totalPayments || totalProducts === totalPayments) {
         return true
       } else {
         return false

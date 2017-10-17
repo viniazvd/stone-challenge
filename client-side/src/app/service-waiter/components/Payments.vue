@@ -61,12 +61,11 @@ export default {
         // this.table[this.tableSelected].payments.push({ productId: '', itemSelected: '', payment: '0.0' })
 
         const getIndexProductSelected = this.payments[[this.payments.length - 2]].itemSelected[0]
-        const itemSelected = this.payments[[this.payments.length - 2]].itemSelected
 
         // add payment in tables.payments[]
         const productId = this.products[getIndexProductSelected][2]
         const lastPaid = parseFloat(this.payments[[this.payments.length - 2]].payment)
-        this.table[this.tableSelected].payments.push({ productId: productId, table: this.tableSelected, itemSelected: itemSelected, paid: lastPaid })
+        this.table[this.tableSelected].payments.push({ productId: productId, paid: lastPaid })
 
         // update payment value inside tables_products
         this.tableProducts[this.tableSelected].products[getIndexProductSelected].paid += lastPaid
